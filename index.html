@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আলোচনা | ইন্টেরিয়র ডিজাইন</title>
+    <!-- Google Fonts for Bangla -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- VARIABLES --- */
+        :root {
+            --primary: #2F4F4F;      /* Deep Forest Green */
+            --accent: #D4AF37;       /* Brass/Gold */
+            --bg-cream: #FDFBF7;    /* Warm Cream */
+            --bg-white: #ffffff;
+            --text-dark: #333333;
+            --text-light: #777777;
+            --font-bn: 'Hind Siliguri', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--font-bn);
+            color: var(--text-dark);
+            background-color: var(--bg-cream);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 600; line-height: 1.3; }
+        
+        .section-header { text-align: center; margin-bottom: 80px; }
+        .section-header span {
+            color: var(--primary); font-weight: 600;
+            text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px;
+            display: block; margin-bottom: 10px;
+        }
+        .section-header h2 { font-size: 2.8rem; color: var(--primary); }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 100px 0; }
+        
+        .btn {
+            display: inline-block; padding: 15px 40px; border-radius: 0; /* Sharp edges for elegance */
+            font-family: var(--font-bn); font-weight: 500; font-size: 1rem;
+            cursor: pointer; transition: 0.4s; letter-spacing: 1px;
+        }
+        .btn-primary { background-color: var(--primary); color: #fff; border: 1px solid var(--primary); }
+        .btn-primary:hover { background-color: transparent; color: var(--primary); }
+        .btn-outline { background-color: transparent; color: var(--primary); border: 1px solid var(--primary); }
+        .btn-outline:hover { background-color: var(--primary); color: #fff; }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background: var(--bg-cream); padding: 25px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 700; color: var(--primary); letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+
+        .nav-menu { display: flex; gap: 40px; }
+        .nav-menu a { font-weight: 500; font-size: 1rem; color: var(--text-dark); position: relative; }
+        .nav-menu a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--accent); transition: 0.3s; }
+        .nav-menu a:hover::after, .nav-menu a.active::after { width: 100%; }
+        .nav-menu a:hover, .nav-menu a.active { color: var(--primary); }
+        .mobile-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 95vh;
+            background: linear-gradient(to right, rgba(253, 251, 247, 0.9), rgba(253, 251, 247, 0.4)), url('https://picsum.photos/seed/interiorbd/1920/1080');
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hero-content {
+            background: rgba(255, 255, 255, 0.95); padding: 60px;
+            max-width: 600px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+        }
+        .hero h1 { font-size: 3rem; color: var(--primary); margin-bottom: 20px; font-style: italic; }
+        .hero p { font-size: 1.1rem; color: var(--text-light); margin-bottom: 30px; }
+        
+        /* --- ABOUT --- */
+        .about-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .about-text p { margin-bottom: 20px; color: var(--text-light); text-align: justify; }
+        .about-img img { border-radius: 4px; }
+        .stat-badge {
+            display: inline-block; background: var(--accent); color: #fff; padding: 5px 15px;
+            font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        /* --- SERVICES --- */
+        .service-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+        .service-box { flex: 1; min-width: 300px; text-align: center; padding: 30px; border: 1px solid #e0e0e0; transition: 0.3s; }
+        .service-box:hover { border-color: var(--primary); background: #fff; }
+        .service-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
+        .service-box h3 { font-size: 1.4rem; margin-bottom: 10px; font-family: var(--font-serif); }
+        .service-box p { color: var(--text-light); font-size: 0.95rem; }
+
+        /* --- PORTFOLIO --- */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        .project-item {
+            position: relative; overflow: hidden; height: 500px; group: 1;
+        }
+        .project-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .project-item:hover img { transform: scale(1.05); }
+        
+        .proj-overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px;
+            background: linear-gradient(to top, rgba(47, 79, 79, 0.9), transparent);
+            color: #fff; transform: translateY(20px); opacity: 0; transition: 0.4s;
+        }
+        .project-item:hover .proj-overlay { transform: translateY(0); opacity: 1; }
+        .proj-overlay h3 { font-size: 1.8rem; font-style: italic; margin-bottom: 5px; }
+        .proj-overlay p { font-size: 0.9rem; color: #ddd; }
+
+        /* --- TESTIMONIALS --- */
+        .testi-section { background-color: var(--primary); color: #fff; }
+        .testi-box { max-width: 800px; margin: 0 auto; text-align: center; padding: 0 40px; }
+        .testi-text { font-family: var(--font-serif); font-size: 1.5rem; font-style: italic; margin-bottom: 30px; line-height: 1.6; }
+        .testi-author { display: flex; justify-content: center; align-items: center; gap: 15px; }
+        .testi-author h4 { color: var(--accent); margin-bottom: 0; }
+        .testi-author span { font-size: 0.9rem; opacity: 0.8; }
+
+        /* --- CONTACT --- */
+        .contact-wrapper {
+            background: var(--bg-white); padding: 80px;
+            border: 1px solid #ddd; display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+        }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 10px; font-weight: 500; color: var(--primary); }
+        .form-control {
+            width: 100%; padding: 15px 0; border: none; border-bottom: 1px solid #ddd;
+            font-family: var(--font-bn); font-size: 1rem; outline: none; transition: 0.3s;
+            background: transparent;
+        }
+        .form-control:focus { border-bottom-color: var(--primary); }
+
+        /* --- FOOTER --- */
+        footer { background: var(--text-dark); color: #fff; padding: 60px 0 20px; text-align: center; }
+        .footer-logo { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 20px; display: inline-block; }
+        .socials a { color: #fff; margin: 0 15px; font-size: 1.2rem; transition: 0.3s; }
+        .socials a:hover { color: var(--accent); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .about-wrapper, .contact-wrapper { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed; top: 80px; left: 0; width: 100%; background: var(--bg-cream);
+                flex-direction: column; padding: 30px; gap: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                transform: translateY(-150%); transition: 0.3s; z-index: 999;
+            }
+            .nav-menu.active { transform: translateY(0); }
+            .mobile-toggle { display: block; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">আলোচনা <span>.</span></a>
+            <div class="mobile-toggle" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="active">হোম</a></li>
+                <li><a href="#about">আমার গল্প</a></li>
+                <li><a href="#services">সেবা</a></li>
+                <li><a href="#portfolio">প্রজেক্ট</a></li>
+                <li><a href="#contact">যোগাযোগ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>আপনার ঘর, <br>আপনার গল্প</h1>
+            <p>আমি আপনার জীবনধারা, স্বাদ এবং আরাম্য বোঝার মতো করে এমন এক কাল্পনিক স্থান তৈরি করি।</p>
+            <a href="#contact" class="btn btn-primary">ফ্রি কনসাল্টেশন</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="about-wrapper">
+                <div class="about-text">
+                    <div class="section-header" style="text-align: left;">
+                        <span>আমার গল্প</span>
+                        <h2>সৌন্দর্য মিশ্রণে <br>স্বপ্নময়</h2>
+                    </div>
+                    <p>
+                        আমি একজন প্রফেশনাল ইন্টেরিয়র ডিজাইনার। গত ৭ বছর ধরে আমি ঢাকা শহরের ফ্ল্যাট এবং বাংলোদেশের বিভিন্ন এলাকায় ঘরবাড়ির জন্য আধুনিক এবং আরাম্য ইন্টেরিয়র সেবা প্রদান করেছি।
+                    </p>
+                    <p>
+                        আমার ডিজাইন ফিলোসফি সহজ, সহজ এবং প্রকৃতিপূর্ণ কিন্তু এর মধ্যে আপনার ব্যক্তির সাথে মিলে একটি নিখুঁত এবং স্থায়ী পরিবেশ তৈরি করাই আমার লক্ষ্য। প্রাকৃতিকৃতি সম্পন্ন হয় সব স্থানই আমার কাছে বিশেষ।
+                    </p>
+                    <p>
+                        আমি বিশ্বাস করি যে একটি সুন্দর ঘর শুধু আসবার নয়; এটি আপনার ব্যক্তি, আপনার স্মৃতি এবং আপনার ভবিষ্যতের প্রতিফলন করে।
+                    </p>
+                </div>
+                <div class="about-img">
+                    <img src="https://picsum.photos/seed/interiordesigner/600/700" alt="Interior Designer" style="border-radius: 4px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section-padding" style="background-color: #fff;">
+        <div class="container">
+            <div class="section-header">
+                <span>আমাদের সেবা</span>
+                <h2>ডিজাইন এবং রেনোভেশন</h2>
+            </div>
+
+            <div class="service-row">
+                <div class="service-box">
+                    <div class="service-icon"><i class="fas fa-couch"></i></div>
+                    <h3>বাসগৃহ ডিজাইন</h3>
+                    <p>ড্রয়িং রুম, লিভিং রুম এবং বেডরুমের সম্পূর্ণ ইন্টেরিয়র সলিউশন তৈরি।</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon"><i class="fas fa-swatchbook"></i></div>
+                    <h3>রং ও মেটেরিয়াল</h3>
+                    <p>দেয়াল প্যালেট নির্বাচন, ফ্লোরিং কার্পেট, ওয়ালপেপার এবং ব্লাইন্ড সিলেকশন।</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon"><i class="fas fa-ruler-combined"></i></div>
+                    <h3>স্পেস প্ল্যানিং</h3>
+                    <p>আপনার ঘরের আকার অনুযাযীতে সঠিকভাবে ফার্নিচার ও আসবার প্লেসমেন্ট।</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon"><i class="fas fa-tools"></i></div>
+                    <h3>রেনোভেশন</h3>
+                    <p>পুরানো ঘরকে আধুনিক রূপ দেওয়ার সম্পূর্ণ পরিকল্পনা সেবা প্রদান।</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span>নির্বাচিত কাজ</span>
+                <h2>আমাদের প্রজেক্টসমূহ</h2>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- Project 1 -->
+                <div class="project-item">
+                    <img src="https://picsum.photos/seed/livingroom/800/1000" alt="Living Room">
+                    <div class="proj-overlay">
+                        <h3>মডার্ন লিভিং রুম</h3>
+                        <p>গুলশান-১, ঢাকা</p>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-item">
+                    <img src="https://picsum.photos/seed/bedroom/800/1000" alt="Bedroom">
+                    <div class="proj-overlay">
+                        <h3>শান্ত বেডরুম</h3>
+                        <p>বনানী, ঢাকা</p>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-item">
+                    <img src="https://picsum.photos/seed/kitchen/800/1000" alt="Kitchen">
+                    <div class="proj-overlay">
+                        <h3>ওপেন কিচেন</h3>
+                        <p>ধানমন্ডি, ঢাকা</p>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-item">
+                    <img src="https://picsum.photos/seed/office/800/1000" alt="Office">
+                    <div class="proj-overlay">
+                        <h3>বাড়ি অফিস</h3>
+                        <p>উত্তরা, ঢাকা</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section-padding testi-section">
+        <div class="container">
+            <div class="testi-box">
+                <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--accent); margin-bottom: 20px;"></i>
+                <p class="testi-text">
+                    "আলোচনা আপার কাজ সত্য মুগ্ধহ। তিনি আমাদের অফিসের ইন্টেরিয়র ডিজাইন যেমন আমাদের ভাবনায় করেছিলেন, তা একেবারে বাস্তবে উঠেছিল। তার রঙ ও টেক্সচার সংমিশ্রণ আমাদের অফিসকে এক নতুন জীবন দিয়েছে।"
+                </p>
+                <div class="testi-author">
+                    <h4>রাফিক আহমেদ</h4>
+                    <span>সিইও, টেক কর্পোরেশন লিমিটেড</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span>যোগাযোগ</span>
+                <h2>আমাদের সাথে যোগাযোগ করুন</h2>
+            </div>
+
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 30px; font-family: var(--font-serif);">ঠিকানা</h3>
+                    
+                    <div class="info-box" style="display: flex; gap: 20px; margin-bottom: 30px; align-items: center;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--accent); font-size: 1.2rem; width: 30px;"></i>
+                        <div>
+                            <p style="font-weight: 600;">অফিস</p>
+                            <p style="color: #666;">হাউস-৪২, রোড-১০, গুলশান-১, ঢাকা</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box" style="display: flex; gap: 20px; margin-bottom: 30px; align-items: center;">
+                        <i class="fas fa-phone-alt" style="color: var(--accent); font-size: 1.2rem; width: 30px;"></i>
+                        <div>
+                            <p style="font-weight: 600;">ফোন</p>
+                            <p style="color: #666;">+৮৮০ ১৭১২-৪৫৬৭৮</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box" style="display: flex; gap: 20px; margin-bottom: 30px; align-items: center;">
+                        <i class="fab fa-whatsapp" style="color: var(--accent); font-size: 1.2rem; width: 30px;"></i>
+                        <div>
+                            <p style="font-weight: 600;">হোয়াটসঅ্যাপ</p>
+                            <p style="color: #666;">+৮৮০ ১৯১২-৩৪৫৬৭৮</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box" style="display: flex; gap: 20px; margin-bottom: 30px; align-items: center;">
+                        <i class="fas fa-envelope" style="color: var(--accent); font-size: 1.2rem; width: 30px;"></i>
+                        <div>
+                            <p style="font-weight: 600;">ইমেইল</p>
+                            <p style="color: #666;">hello@alchona-interior.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('ধন্যবাদ! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।');">
+                    <div class="form-group">
+                        <label>আপনার নাম</label>
+                        <input type="text" class="form-control" placeholder="আপনার নাম লিখুন" required>
+                    </div>
+                    <div class="form-group">
+                        <label>ইমেইল এড্রেস</label>
+                        <input type="email" class="form-control" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>প্রজেক্ট টাইপ</label>
+                        <select class="form-control">
+                            <option value="" disabled selected>কি সেবা প্রয়োজন করছেন?</option>
+                            <option>পূর্ণ বাসগৃহ ডিজাইন</option>
+                            <option>শুধু রং ও মেটেরিয়াল</option>
+                            <option>স্পেস প্ল্যানিং</option>
+                            <option>রেনোভেশন</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>আপনার বার্তা</label>
+                        <textarea class="form-control" rows="4" placeholder="বিস্তারিত লিখুন..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">বার্তা পাঠান</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="#" class="footer-logo">আলোচনা <span>.</span></a>
+            <p style="max-width: 500px; margin: 0 auto 30px; font-size: 0.95rem; opacity: 0.8;">
+                সৌন্দর্য ডিজাইন যা আপনার অন্তরে নিয়ে।
+            </p>
+            <div class="socials">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <div style="border-top: 1px solid #444; padding-top: 20px; font-size: 0.85rem; opacity: 0.6;">
+                &copy; ২০২৪ আলোচনা ইন্টেরিয়র। সর্বস্বত্ব সংরক্ষিত।
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS for Mobile Menu -->
+    <script>
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
